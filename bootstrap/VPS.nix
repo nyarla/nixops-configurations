@@ -1,12 +1,8 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    ./hardware-configurations.nix
-  ];
-
   networking.firewall = {
     enable          = true;
-    allowedTCPPorts = [ 57092 ]; 
+    allowedTCPPorts = [ 57092 ];
   };
 
   services.openssh = {
@@ -22,7 +18,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    coreutils curl
+    coreutils curl vim iproute
   ];
 
   environment.extraInit = ''
