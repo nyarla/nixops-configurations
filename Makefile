@@ -6,7 +6,6 @@ D :=
 
 all: deploy
 
-
 create:
 	@test ! -z "$(D)" || (echo "D (deployment definition) is not defined" && exit 1)
 	@test ! -z "$(N)" || (echo "N (deployment name) is not defined" && exit 1)
@@ -23,3 +22,9 @@ create-web:
 
 deploy-web:
 	@$(MAKE) N=web deploy
+
+ssh-web:
+	nixops ssh server
+
+reboot-web:
+	nixops reboot -d web

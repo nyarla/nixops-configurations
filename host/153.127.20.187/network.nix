@@ -1,8 +1,9 @@
 { config, pkgs, ... }:
 {
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/vda";
+  networking.useDHCP = false;
+
+  networking.firewall.interfaces.ens3.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.interfaces.ens3.allowedUDPPorts = [ 80 443 ];
 
   networking.interfaces.ens3 = {
     ipv4 = {
@@ -24,12 +25,4 @@
   };
 
   networking.nameservers = [ "133.242.0.3" "133.242.0.4" "2401:2500::1" ];
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "jp106";
-    defaultLocale = "en_US.UTF-8";
-  };
-
-  time.timeZone = "Asia/Tokyo";
-
 }

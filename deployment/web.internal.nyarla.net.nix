@@ -5,6 +5,7 @@
     deployment.targetPort = 57092;
     imports = [
       ../host/153.127.20.187/hardware-configuration.nix
+      ../host/153.127.20.187/machine.nix
       ../host/153.127.20.187/network.nix
       ../profile/web.nix
     ];
