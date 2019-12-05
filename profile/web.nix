@@ -10,5 +10,6 @@
 
     ../config/per-service/h2o.nix
     ../config/per-service/fathom.nix
+    ../config/per-service/netlify-cms-oauth-provider.nix
   ];
 }

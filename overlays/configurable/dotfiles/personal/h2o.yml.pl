@@ -122,6 +122,21 @@ sub config {
     },
   } );
 
+  # api.nyarla.net:443
+  # ------------------
+  push @paths, host( https => 'api.nyarla.net' => +{
+    '/' => {
+      'proxy.reverse.url' => 'http://127.0.0.1:10002',
+    },
+  } => 'nyarla.net' );
+
+  # api.nyarla.net
+  push @paths, host( http => 'api.nyarla.net' => +{
+    '/' => {
+      'redirect' => { status => 303, url => "https://api.nyarla.net/" },
+    },
+  } );
+
   # Redirections
   # ============
   
@@ -171,6 +186,7 @@ sub config {
 
     'http2-reprioritize-blocking-assets'  => 'ON',
     'ssl-session-resumption'              => { mode => 'all' },
+    'compress'                            => 'ON',
 
     'hosts'       => { @paths },
   };
