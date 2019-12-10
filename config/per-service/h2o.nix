@@ -9,9 +9,11 @@
     }; 
     serviceConfig = {
       Type      = "oneshot";
-      ExecStart = "${pkgs.acme-update}/bin/acme-update";
-      User      = "www-data";
-      Group     = "www-data";
+      ExecStart = "${pkgs.writeScript "acme-update-wrapper.sh" ''
+        #!${pkgs.stdenv.shell}
+        su - www-data <"$(cat ${pkgs.acme-update}/bin/acme-update)"
+        ${pkgs.coreutils}/bin/kill -HUP $(cat /app/h2o/h2o.pid)
+      ''}";
     };
   };
 
