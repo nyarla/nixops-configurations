@@ -11,7 +11,7 @@
       Type      = "oneshot";
       ExecStart = "${pkgs.writeScript "acme-update-wrapper.sh" ''
         #!${pkgs.stdenv.shell}
-        su - www-data <"$(cat ${pkgs.acme-update}/bin/acme-update)"
+        cat ${pkgs.acme-update}/bin/acme-update | /run/wrappers/bin/su - www-data
         ${pkgs.coreutils}/bin/kill -HUP $(cat /app/h2o/h2o.pid)
       ''}";
     };
